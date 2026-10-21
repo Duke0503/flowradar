@@ -1,0 +1,122 @@
+{
+  "$schema": "./domain-model.schema.json",
+  "application": "flowradar",
+  "version": "0.1.0",
+  "generatedAt": "2026-10-21",
+  "locale": "en",
+  "status": "proposed",
+  "strategicModel": {
+    "primaryDomain": "",
+    "classificationRationale": "",
+    "subdomains": []
+  },
+  "contexts": [],
+  "relations": [],
+  "buildingBlocks": [],
+  "decisions": [
+    {
+      "id": "d1-signals-only",
+      "decision": "FlowRadar publishes trade signals only. It never places orders and never holds exchange API keys.",
+      "rationale": "The MVP scope stays small, the project avoids liability for users' orders, and the edge is the quality of the signal.",
+      "status": "accepted",
+      "sources": [
+        ".context/decisions/2026-10-21-D1-signals-only.md"
+      ]
+    },
+    {
+      "id": "d2-win-rate-active-only",
+      "decision": "Win rate counts only setups that became active and ended at a take-profit. Invalidated and expired setups are tracked as a separate invalidation rate, and results are stored as R-multiples.",
+      "rationale": "A setup that never entered is not a trade. Multi-TP setups make a binary result disputed.",
+      "status": "accepted",
+      "sources": [
+        ".context/decisions/2026-10-21-D2-win-rate-active-only.md"
+      ]
+    },
+    {
+      "id": "d3-python-owns-quant-and-lifecycle",
+      "decision": "The Python Quant Engine is the only place that computes POC, VAH, VAL and CVD, and the Python Opportunity Radar is the only writer of TradeSetup status changes. Go only transports data.",
+      "rationale": "One owner keeps the chart and the AI on the same numbers. Setups follow 15m and 4H bars, so status checks do not need 50 ms latency.",
+      "status": "accepted",
+      "sources": [
+        ".context/decisions/2026-10-21-D3-python-owns-quant-and-lifecycle.md"
+      ]
+    },
+    {
+      "id": "d4-mvp-public-read-only",
+      "decision": "The MVP is public and read-only, with no login and no billing.",
+      "rationale": "Auth and billing are generic. Cost does not grow with users.",
+      "status": "accepted",
+      "sources": [
+        ".context/decisions/2026-10-21-D4-mvp-public-read-only.md"
+      ]
+    },
+    {
+      "id": "d5-store-rejected-setups",
+      "decision": "A setup rejected by the guardrail is stored with its rejection reason and is never shown to users.",
+      "rationale": "The rejection history is the best data for tuning prompts and thresholds.",
+      "status": "accepted",
+      "sources": [
+        ".context/decisions/2026-10-21-D5-store-rejected-setups.md"
+      ]
+    }
+  ],
+  "openQuestions": [
+    {
+      "id": "oq1-minimum-rr",
+      "question": "What is the minimum R:R for each timeframe?",
+      "impact": "The design conversation says 2.0 for all, then 2.0 intraday and 3.0 HTF. The research report says 3.0. The guardrail needs one value per timeframe.",
+      "owner": "Product owner",
+      "status": "open"
+    },
+    {
+      "id": "oq2-tighten-targets-vs-rr",
+      "question": "Does tightening targets on a counter-trend setup break the R:R gate?",
+      "impact": "Closer targets lower R:R, so a setup can pass at generation and fail the guardrail.",
+      "owner": "Architect",
+      "status": "open"
+    },
+    {
+      "id": "oq3-publish-computed-profile",
+      "question": "How does Python publish computed bars and value areas so the chart never recomputes them?",
+      "impact": "D3 (Python is the only computer of value area) needs a channel and a message shape.",
+      "owner": "Architect",
+      "status": "open"
+    },
+    {
+      "id": "oq4-redis-naming",
+      "question": "Which Redis channel naming rule and envelope are the standard?",
+      "impact": "The documents use four different channel names.",
+      "owner": "Architect",
+      "status": "open"
+    },
+    {
+      "id": "oq5-cvd-definition",
+      "question": "Should CVD run across candles, and who detects the swing points for divergence?",
+      "impact": "The first Python draft restarts CVD at every candle and does not say where swing lows come from.",
+      "owner": "Architect",
+      "status": "open"
+    },
+    {
+      "id": "oq6-drift-limit",
+      "question": "Is the 2% entry-drift limit one value or does it depend on timeframe?",
+      "impact": "A flat 2% is large for a 15m scalp and small for a 4H swing.",
+      "owner": "Product owner",
+      "status": "open"
+    },
+    {
+      "id": "oq7-expiry-time",
+      "question": "How long may a setup stay pending before it expires?",
+      "impact": "D2 (win rate counts active setups only) adds the EXPIRED state, but no time limit is set.",
+      "owner": "Product owner",
+      "status": "open"
+    }
+  ],
+  "sources": [
+    "docs/index.md",
+    "docs/product-vision.md",
+    "docs/architecture.md",
+    "docs/ai-accuracy-pipeline.md",
+    "docs/known-issues.md",
+    "docs/open-source-research.md"
+  ]
+}
