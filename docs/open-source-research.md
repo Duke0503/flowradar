@@ -5,21 +5,25 @@ mapped to the three services. Reuse the code or the pattern. Do not rebuild.
 
 ## Mapping to the three services
 
-| Service | Project | What FlowRadar takes | Pattern learned |
-|---|---|---|---|
-| Frontend | `awahab07/lightweight-orderflow-charts` | Footprint, TPO, POC, delta summary, CVD sub-chart on TradingView Lightweight Charts v5 | `OrderFlowBar` contract and mintick bucketing; dual-surface number formatting |
-| Frontend | `tapedelta/kline-orderbook-chart` | Liquidation heatmap overlay | Separate drawing from data |
-| Frontend | `Tucsky/aggr` | Web Worker that batches trades | Timeout-based aggregation: group ticks of the same millisecond before drawing |
-| Gateway | `edgedepthhq/edgedepth-gateway` | Go collector for `aggTrade` and `depth`, Protobuf and Zstd packing | Pluggable venue interface and envelope pattern |
-| Gateway | `apache/superset` websocket | Redis Pub/Sub fan-out | Message envelope and connection draining |
-| Gateway | `Tucsky/aggr-server` | RAM buffer joined to a database | Hot buffer plus cold store merge |
-| Python | `jose-donato/cryexc-backend` | DuckDB in-memory CVD and footprint | In-memory columnar computation |
-| Python | `wickra-lib/wickra` | Two-pointer POC, VAH, VAL | Streaming-first indicators |
-| Python | `ymys/Bot-Auto-Screening-Bybit-trading` | CVD divergence score, RVOL fakeout filter, trap filter | Deterministic pre-scoring |
-| Python | `qrak/LLM_trader` | ChromaDB RAG, claim validation | Memory plus cross-checking the model's claims |
-| Python | `lagarcess/crypto-signals`, `anvilfilbert/Auto-Crypto-Tradingjournal` | Lifecycle, multi-TP ladder, entry-drift guard | Managed trade lifecycle |
-| Python | `mahmoud20138/OrderFlow-Analysis-Pro` | Rules for absorption, liquidity sweeps and delta divergence | Rule engine as pre-processor for the AI |
-| Native app | `flowsurface-rs/flowsurface` | TPO math and DuckDB storage schema (a Rust desktop app, not a web app) | Value area calculation, Arrow IPC streams |
+| Service | Project | What FlowRadar takes | Pattern learned | License |
+|---|---|---|---|---|
+| Frontend | `awahab07/lightweight-orderflow-charts` | Footprint, TPO, POC, delta summary, CVD sub-chart on TradingView Lightweight Charts v5 | `OrderFlowBar` contract and mintick bucketing; dual-surface number formatting | MIT |
+| Frontend | `tapedelta/kline-orderbook-chart` | Liquidation heatmap overlay | Separate drawing from data | Proprietary: do not use |
+| Frontend | `Tucsky/aggr` | Web Worker that batches trades | Timeout-based aggregation: group ticks of the same millisecond before drawing | GPL-3.0: pattern only |
+| Gateway | `edgedepthhq/edgedepth-gateway` | Go collector for `aggTrade` and `depth`, Protobuf and Zstd packing | Pluggable venue interface and envelope pattern | MIT |
+| Gateway | `apache/superset` websocket | Redis Pub/Sub fan-out | Message envelope and connection draining | Apache-2.0 |
+| Gateway | `Tucsky/aggr-server` | RAM buffer joined to a database | Hot buffer plus cold store merge | None found: pattern only |
+| Python | `jose-donato/cryexc-backend` | DuckDB in-memory CVD and footprint | In-memory columnar computation | None found: pattern only |
+| Python | `wickra-lib/wickra` | Two-pointer POC, VAH, VAL | Streaming-first indicators | Apache-2.0 |
+| Python | `ymys/Bot-Auto-Screening-Bybit-trading` | CVD divergence score, RVOL fakeout filter, trap filter | Deterministic pre-scoring | MIT |
+| Python | `qrak/LLM_trader` | ChromaDB RAG, claim validation | Memory plus cross-checking the model's claims | MIT |
+| Python | `lagarcess/crypto-signals`, `anvilfilbert/Auto-Crypto-Tradingjournal` | Lifecycle, multi-TP ladder, entry-drift guard | Managed trade lifecycle | None found: pattern only; GPL-3.0: pattern only |
+| Python | `mahmoud20138/OrderFlow-Analysis-Pro` | Rules for absorption, liquidity sweeps and delta divergence | Rule engine as pre-processor for the AI | MIT |
+| Native app | `flowsurface-rs/flowsurface` | TPO math and DuckDB storage schema (a Rust desktop app, not a web app) | Value area calculation, Arrow IPC streams | GPL-3.0: pattern only |
+
+Licenses were checked on 2026-10-21. "Pattern only" means learn the idea and write our own code,
+because the project is GPL-3.0 or has no license file. See [licensing.md](licensing.md) before
+copying anything.
 
 ## Findings by area
 

@@ -13,3 +13,5 @@ An order flow analytics platform with an AI Opportunity Radar. Start with `docs/
   project owner accepts it.
 - FlowRadar publishes signals only and never places orders (D1 in `docs/domain-model.json`).
 - Timestamps are UTC Unix milliseconds everywhere except the browser.
+- The product is planned for commercial release in Vietnam and abroad (D6). Do not copy code from GPL-3.0, unlicensed or proprietary projects; see `docs/licensing.md`.
+- The project is in the planning phase. Do not start implementation without the project owner's go-ahead.

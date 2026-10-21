@@ -54,6 +54,11 @@ The drift guard invalidates a setup that moves more than 2% from entry before it
 
 D2 introduces the `EXPIRED` state. The time limit per timeframe is not set anywhere.
 
+## Commercial release questions
+
+OQ8 to OQ13 cover data rights, signal regulation and code licenses. They are explained in
+[commercialization.md](commercialization.md) and [licensing.md](licensing.md).
+
 ## Language note
 
 The source documents mix Vietnamese and English. The project is now English only. The code in

@@ -58,6 +58,15 @@
       "sources": [
         ".context/decisions/2026-10-21-D5-store-rejected-setups.md"
       ]
+    },
+    {
+      "id": "d6-commercial-release-planning-first",
+      "decision": "FlowRadar is planned for commercial release in Vietnam and internationally. The team plans first and builds after the planning risks are cleared.",
+      "rationale": "Licensing, data rights and regulation can change the design, so they are checked before implementation.",
+      "status": "accepted",
+      "sources": [
+        ".context/decisions/2026-10-21-D6-commercial-release-planning-first.md"
+      ]
     }
   ],
   "openQuestions": [
@@ -109,6 +118,48 @@
       "impact": "D2 (win rate counts active setups only) adds the EXPIRED state, but no time limit is set.",
       "owner": "Product owner",
       "status": "open"
+    },
+    {
+      "id": "oq8-coinglass-public-display",
+      "question": "Does the CoinGlass plan allow showing its data to public end users, and which plan does?",
+      "impact": "The public terms bar redistribution and commercial use without authorization. If refused, the derivatives data source and cost model change.",
+      "owner": "Product owner",
+      "status": "open"
+    },
+    {
+      "id": "oq9-exchange-feed-terms",
+      "question": "Do the Binance and Bybit API terms allow redistributing trade data in a commercial product?",
+      "impact": "Not checked. The tick feed is the base of the chart and the quant engine.",
+      "owner": "Architect",
+      "status": "open"
+    },
+    {
+      "id": "oq10-signal-regulation",
+      "question": "Does publishing signals with entry, stop and targets need a license in Vietnam, the EU or the US?",
+      "impact": "Decides marketing wording, pricing and whether a regulated entity is needed. D1 (signals only) keeps the risk low but does not remove it.",
+      "owner": "Product owner",
+      "status": "open"
+    },
+    {
+      "id": "oq11-gpl-and-unlicensed-code",
+      "question": "How are GPL-3.0 and unlicensed projects handled: clean-room rewrite or written permission?",
+      "impact": "Three projects are GPL-3.0 and three have no license. The research plans to take code from them.",
+      "owner": "Architect",
+      "status": "open"
+    },
+    {
+      "id": "oq12-deepseek-terms",
+      "question": "Do the DeepSeek API terms allow commercial use of outputs, and what happens to the data sent in prompts?",
+      "impact": "The AI radar is the core product and depends on this API.",
+      "owner": "Architect",
+      "status": "open"
+    },
+    {
+      "id": "oq13-liquidation-heatmap-source",
+      "question": "Do we buy, build or defer the liquidation heatmap?",
+      "impact": "The only library found for it is proprietary.",
+      "owner": "Architect",
+      "status": "open"
     }
   ],
   "sources": [
@@ -117,6 +168,8 @@
     "docs/architecture.md",
     "docs/ai-accuracy-pipeline.md",
     "docs/known-issues.md",
-    "docs/open-source-research.md"
+    "docs/open-source-research.md",
+    "docs/licensing.md",
+    "docs/commercialization.md"
   ]
 }
